@@ -6,21 +6,32 @@
       </li>
     </ul>
     <div>
-      {{ composition }}
+      <highcharts :options="chartOptions"></highcharts>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import { Chart } from 'highcharts-vue'
 import { CompositionResponse, PrefecturesResponse } from '~/types/resas'
 
 export default Vue.extend({
   name: 'IndexPage',
+  components: {
+    highcharts: Chart,
+  },
   data() {
     return {
       prefectures: {},
       composition: {},
+      chartOptions: {
+        series: [
+          {
+            data: [1, 2, 3], // sample data
+          },
+        ],
+      },
     }
   },
   created() {

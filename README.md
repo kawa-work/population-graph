@@ -12,6 +12,8 @@
 
 ## Features
 
+- [x] [Highcharts](https://www.highcharts.com/)
+
 ## Dev Features
 
 - [x] Eslint
