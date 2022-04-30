@@ -1,11 +1,15 @@
 <template>
-  <chart :options="chartOptions"></chart>
+  <div>
+    <chart v-if="responseStatus === 200" :options="chartOptions"></chart>
+    <p v-else>データ取得中</p>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import { Chart } from 'highcharts-vue'
-import { Composition, CompositionResponse } from '~/types/resas'
+import { CompositionResponse } from '~/types/resas'
+import { convertCompositionToSeries } from '~/utils/convert'
 
 export default Vue.extend({
   components: {
@@ -13,31 +17,39 @@ export default Vue.extend({
   },
   data() {
     return {
-      composition: {} as Composition,
-      chartOptions: {
-        series: [
-          {
-            data: [1, 2, 3], // sample data
-          },
-        ],
-      },
+      series: [] as Number[][],
+      responseStatus: 0 as Number,
     }
+  },
+  computed: {
+    chartOptions(): Object {
+      return {
+        title: { text: '人口推移' },
+        xAxis: { title: { text: '年' } },
+        yAxis: { title: { text: '人口' } },
+        series: [{ data: this.series }],
+      }
+    },
   },
   created() {
     this.fetchComposition()
   },
   methods: {
     async fetchComposition() {
-      const compositionResponse = await this.$resas.$get<CompositionResponse>(
-        'population/composition/perYear',
-        {
-          params: {
-            cityCode: '-', // All city data
-            prefCode: 1,
-          },
-        }
+      const { status, data: compositionResponse } =
+        await this.$resas.get<CompositionResponse>(
+          'population/composition/perYear',
+          {
+            params: {
+              cityCode: '-', // All city data
+              prefCode: 1,
+            },
+          }
+        )
+      this.responseStatus = status
+      this.series = convertCompositionToSeries(
+        compositionResponse.result.data[0]
       )
-      this.composition = compositionResponse.result
     },
   },
 })
