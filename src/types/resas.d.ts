@@ -14,7 +14,7 @@ export type Prefectures = Prefecture[]
 
 export type PrefecturesResponse = ResasResponse<Prefectures>
 
-interface CompositionDataItem {
+export interface CompositionDataItem {
   label: String
   data: Array<{
     year: Number
