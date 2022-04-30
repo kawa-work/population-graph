@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- 
+			TODO: add other case such as 429 Too Many Request
+			ref: https://opendata.resas-portal.go.jp/docs/api/v1/detail/index.html
+		 -->
     <chart v-if="responseStatus === 200" :options="chartOptions"></chart>
     <p v-else>データ取得中</p>
   </div>
