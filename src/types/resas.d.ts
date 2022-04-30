@@ -10,7 +10,7 @@ interface Prefecture {
   prefName: String
 }
 
-type Prefectures = Prefecture[]
+export type Prefectures = Prefecture[]
 
 export type PrefecturesResponse = ResasResponse<Prefectures>
 
@@ -22,7 +22,7 @@ interface CompositionDataItem {
     rate?: Number
   }>
 }
-interface Composition {
+export interface Composition {
   boundaryYear: Number
   data: CompositionDataItem[]
 }

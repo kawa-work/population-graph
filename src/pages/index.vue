@@ -1,42 +1,25 @@
 <template>
   <div>
-    <ul>
-      <li v-for="pref in prefectures" :key="pref.prefCode">
-        {{ pref.prefName }}
-      </li>
-    </ul>
+    <PrefChipList :prefectures="prefectures"></PrefChipList>
     <div>
-      <highcharts :options="chartOptions"></highcharts>
+      <ChartPopulation></ChartPopulation>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Chart } from 'highcharts-vue'
-import { CompositionResponse, PrefecturesResponse } from '~/types/resas'
+import { Prefectures, PrefecturesResponse } from '~/types/resas'
 
 export default Vue.extend({
   name: 'IndexPage',
-  components: {
-    highcharts: Chart,
-  },
   data() {
     return {
-      prefectures: {},
-      composition: {},
-      chartOptions: {
-        series: [
-          {
-            data: [1, 2, 3], // sample data
-          },
-        ],
-      },
+      prefectures: [] as Prefectures,
     }
   },
   created() {
     this.fetchPrefectures()
-    this.fetchComposition()
   },
   methods: {
     async fetchPrefectures() {
@@ -44,18 +27,6 @@ export default Vue.extend({
         'prefectures'
       )
       this.prefectures = prefecturesResponse.result
-    },
-    async fetchComposition() {
-      const compositionResponse = await this.$resas.$get<CompositionResponse>(
-        'population/composition/perYear',
-        {
-          params: {
-            cityCode: '-', // All city data
-            prefCode: 1,
-          },
-        }
-      )
-      this.composition = compositionResponse.result
     },
   },
 })
