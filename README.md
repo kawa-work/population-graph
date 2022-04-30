@@ -13,6 +13,7 @@
 ## Features
 
 - [x] [Highcharts](https://www.highcharts.com/)
+- [x] [RESAS](https://resas.go.jp/#/13/13101)
 
 ## Dev Features
 
@@ -22,6 +23,9 @@
 - [x] Commitlint
 - [x] lint-staged
 - [x] husky
+- [x] TypeScript
+- [x] Jest
+- [x] axios
 - [ ] SCSS
 
 ## Build Setup
