@@ -47,8 +47,14 @@ export default Vue.extend({
           }
         )
       this.responseStatus = status
+      enum compositionDataEnum {
+        '総人口',
+        '年少人口',
+        '生産年齢人口',
+        '老年人口',
+      }
       this.series = convertCompositionToSeries(
-        compositionResponse.result.data[0]
+        compositionResponse.result.data[compositionDataEnum['総人口']]
       )
     },
   },
