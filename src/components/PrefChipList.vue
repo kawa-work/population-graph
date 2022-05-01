@@ -61,6 +61,8 @@ export default Vue.extend({
     overflow-x: scroll;
     font-size: 14px;
     list-style-type: none;
+    border: 1px solid rgb(0 0 0 / 0.4);
+    border-radius: 8px;
   }
 
   &__item {
