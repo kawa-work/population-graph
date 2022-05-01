@@ -6,6 +6,7 @@ import { CompositionResponse, Prefecture } from '~/types/resas'
 export const state = () => ({
   series: [] as Series,
   responseStatus: 0,
+  boundaryYear: 0,
 })
 
 export type highchartsState = ReturnType<typeof state>
@@ -20,6 +21,7 @@ enum compositionDataEnum {
 export const getters: GetterTree<highchartsState, highchartsState> = {
   getSeries: (state) => state.series,
   getResponseStatus: (state) => state.responseStatus,
+  getBoundaryYear: (state) => state.boundaryYear,
 }
 
 export const mutations: MutationTree<highchartsState> = {
@@ -30,6 +32,9 @@ export const mutations: MutationTree<highchartsState> = {
   pullSeries: (state, pref: Prefecture) => {
     const prefName = pref.prefName
     state.series = state.series.filter((v) => v.name !== prefName)
+  },
+  setBoundaryYear: (state, boundaryYear) => {
+    state.boundaryYear = boundaryYear
   },
 }
 
@@ -51,5 +56,6 @@ export const actions: ActionTree<highchartsState, highchartsState> = {
       compositionResponse.result.data[compositionDataEnum['総人口']]
     )
     commit('pushSeries', { name: pref.prefName, data: seriesItemData })
+    commit('setBoundaryYear', compositionResponse.result.boundaryYear)
   },
 }

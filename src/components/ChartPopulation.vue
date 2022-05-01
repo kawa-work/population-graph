@@ -1,10 +1,11 @@
 <template>
   <div class="chart">
-    <chart
-      v-if="getResponseStatus === 200"
-      :options="chartOptions"
-      class="chart__figure"
-    ></chart>
+    <div v-if="getResponseStatus === 200" class="chart__figure">
+      <chart :options="chartOptions"></chart>
+      <p class="chart__annotation">
+        {{ getBoundaryYear }}年が実績値と推計値の区切り年
+      </p>
+    </div>
     <div v-else class="chart__message">
       <p v-if="getResponseStatus === 0">
         都道府県を選択して人口データを取得しましょう
@@ -29,7 +30,11 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters('prefList', ['getSelectedPrefList']),
-    ...mapGetters('highcharts', ['getSeries', 'getResponseStatus']),
+    ...mapGetters('highcharts', [
+      'getSeries',
+      'getResponseStatus',
+      'getBoundaryYear',
+    ]),
     chartOptions(): ChartOptions {
       const options = {
         title: { text: '人口推移' },
@@ -51,6 +56,12 @@ export default Vue.extend({
   width: 90%;
   margin: auto;
   margin-top: 10vh;
+
+  &__annotation {
+    margin-top: 8px;
+    font-size: 8px;
+    color: rgb(0 0 0 / 0.7);
+  }
 
   &__message {
     display: flex;
