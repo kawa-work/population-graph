@@ -26,9 +26,18 @@
 - [x] TypeScript
 - [x] Jest
 - [x] axios
-- [ ] SCSS
+- [x] SCSS
+- [x] Vuex
 
 ## Build Setup
+
+### Environment Variables
+
+ルートディレクトリに`.env`を作成し、以下の形式で RESAS API key を記載する
+
+```
+RESAS_API_KEY=<Your RESAS API key>
+```
 
 ```bash
 # install dependencies
