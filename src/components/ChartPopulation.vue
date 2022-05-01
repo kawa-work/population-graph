@@ -57,6 +57,7 @@ export default Vue.extend({
     align-items: center;
     justify-content: center;
     height: 50vh;
+    font-size: 14px;
     text-align: center;
     border: 1px solid rgb(0 0 0 / 0.4);
     border-radius: 32px;

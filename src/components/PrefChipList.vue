@@ -56,6 +56,8 @@ export default Vue.extend({
 .chip {
   &__list {
     display: flex;
+    height: 100px;
+    margin: 12px;
     overflow-x: scroll;
     font-size: 14px;
     list-style-type: none;
@@ -64,12 +66,15 @@ export default Vue.extend({
   &__item {
     padding: 8px 12px;
     margin: 4px 8px;
+    font-weight: bold;
+    color: rgb(0 0 0 / 0.7);
     cursor: pointer;
     background-color: rgb(0 0 0 / 0.1);
     border-radius: 100px;
     writing-mode: vertical-rl;
 
     &--active {
+      color: rgb(0 0 255 / 0.7);
       background-color: rgb(0 0 255 / 0.1);
     }
   }
