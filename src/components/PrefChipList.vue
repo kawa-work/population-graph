@@ -5,7 +5,7 @@
         v-for="(pref, index) in getUnselectedPrefList"
         :key="pref.prefCode"
         class="chip__item"
-        @click="selectPref({ pref, index })"
+        @click="addPref(pref, index)"
       >
         {{ pref.prefName }}
       </li>
@@ -15,7 +15,7 @@
         v-for="(pref, index) in getSelectedPrefList"
         :key="pref.prefCode"
         class="chip__item chip__item--active"
-        @click="unselectPref({ pref, index })"
+        @click="removePref(pref, index)"
       >
         {{ pref.prefName }}
       </li>
@@ -26,6 +26,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { Prefecture } from '~/types/resas'
 
 export default Vue.extend({
   computed: {
@@ -36,7 +37,17 @@ export default Vue.extend({
   },
   methods: {
     ...mapMutations('prefList', ['selectPref', 'unselectPref']),
+    ...mapMutations('highcharts', ['pullSeries']),
     ...mapActions('prefList', ['fetchPrefectures']),
+    ...mapActions('highcharts', ['fetchComposition']),
+    addPref(pref: Prefecture, index: number) {
+      this.selectPref({ pref, index })
+      this.fetchComposition({ pref })
+    },
+    removePref(pref: Prefecture, index: number) {
+      this.unselectPref({ pref, index })
+      this.pullSeries(pref)
+    },
   },
 })
 </script>
