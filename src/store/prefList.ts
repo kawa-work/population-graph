@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { Prefecture, Prefectures, PrefecturesResponse } from '~/types/resas'
 
@@ -21,9 +22,10 @@ export const getters: GetterTree<PrefListState, PrefListState> = {
 }
 
 export const mutations: MutationTree<PrefListState> = {
-  setPrefList: (state, prefList: Prefectures) => (state.prefList = prefList),
+  setPrefList: (state, prefList: Prefectures) =>
+    (state.prefList = _.cloneDeep<Prefectures>(prefList)),
   setUnselectedList: (state, prefList: Prefectures) =>
-    (state.unselectedPrefList = prefList),
+    (state.unselectedPrefList = _.cloneDeep<Prefectures>(prefList)),
   selectPref: (state, payload: SelectPrefPayload) => {
     state.unselectedPrefList.splice(payload.index, 1)
     state.selectedPrefList.push(payload.pref)
