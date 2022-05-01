@@ -1,13 +1,30 @@
 type Message = String | null
 
-interface Prefecture {
-  prefCode: Number
+interface ResasResponse<T> {
+  message: Message
+  result: T
+}
+
+export interface Prefecture {
+  prefCode: number
   prefName: String
 }
 
-type Prefectures = Prefecture[]
+export type Prefectures = Prefecture[]
 
-export interface PrefecturesResponse {
-  message: Message
-  result: Prefectures
+export type PrefecturesResponse = ResasResponse<Prefectures>
+
+export interface CompositionDataItem {
+  label: String
+  data: Array<{
+    year: number
+    value: number
+    rate?: number
+  }>
 }
+export interface Composition {
+  boundaryYear: number
+  data: CompositionDataItem[]
+}
+
+export type CompositionResponse = ResasResponse<Composition>
