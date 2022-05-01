@@ -21,8 +21,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      series: [] as Number[][],
-      responseStatus: 0 as Number,
+      series: [] as number[][],
+      responseStatus: 0 as number,
     }
   },
   computed: {

@@ -5,8 +5,8 @@ interface ResasResponse<T> {
   result: T
 }
 
-interface Prefecture {
-  prefCode: Number
+export interface Prefecture {
+  prefCode: number
   prefName: String
 }
 
@@ -17,13 +17,13 @@ export type PrefecturesResponse = ResasResponse<Prefectures>
 export interface CompositionDataItem {
   label: String
   data: Array<{
-    year: Number
-    value: Number
-    rate?: Number
+    year: number
+    value: number
+    rate?: number
   }>
 }
 export interface Composition {
-  boundaryYear: Number
+  boundaryYear: number
   data: CompositionDataItem[]
 }
 
