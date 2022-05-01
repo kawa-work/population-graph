@@ -1,9 +1,12 @@
 <template>
   <div>
-    <PrefChipList></PrefChipList>
-    <div>
-      <ChartPopulation></ChartPopulation>
-    </div>
+    <main>
+      <PrefChipList></PrefChipList>
+      <div>
+        <ChartPopulation></ChartPopulation>
+      </div>
+    </main>
+    <TheFooter></TheFooter>
   </div>
 </template>
 
