@@ -5,3 +5,10 @@ declare module 'vue/types/vue' {
     $resas: NuxtAxiosInstance
   }
 }
+
+declare module 'vuex/types/index' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface Store<S> {
+    $resas: NuxtAxiosInstance
+  }
+}

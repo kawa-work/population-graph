@@ -2,20 +2,20 @@
   <div class="chip">
     <ul class="chip__list">
       <li
-        v-for="(pref, index) in unselectedPrefList"
+        v-for="(pref, index) in getUnselectedPrefList"
         :key="pref.prefCode"
         class="chip__item"
-        @click="selectPref(pref, index)"
+        @click="selectPref({ pref, index })"
       >
         {{ pref.prefName }}
       </li>
     </ul>
     <ul class="chip__list">
       <li
-        v-for="(pref, index) in selectedPrefList"
+        v-for="(pref, index) in getSelectedPrefList"
         :key="pref.prefCode"
         class="chip__item chip__item--active"
-        @click="unselectPref(pref, index)"
+        @click="unselectPref({ pref, index })"
       >
         {{ pref.prefName }}
       </li>
@@ -25,33 +25,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Prefecture, Prefectures, PrefecturesResponse } from '~/types/resas'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default Vue.extend({
-  data() {
-    return {
-      unselectedPrefList: [] as Prefectures,
-      selectedPrefList: [] as Prefectures,
-    }
+  computed: {
+    ...mapGetters('prefList', ['getUnselectedPrefList', 'getSelectedPrefList']),
   },
   created() {
     this.fetchPrefectures()
   },
   methods: {
-    async fetchPrefectures() {
-      const prefecturesResponse = await this.$resas.$get<PrefecturesResponse>(
-        'prefectures'
-      )
-      this.unselectedPrefList = prefecturesResponse.result
-    },
-    selectPref(pref: Prefecture, index: number) {
-      this.unselectedPrefList.splice(index, 1)
-      this.selectedPrefList.push(pref)
-    },
-    unselectPref(pref: Prefecture, index: number) {
-      this.selectedPrefList.splice(index, 1)
-      this.unselectedPrefList.splice(0, 0, pref)
-    },
+    ...mapMutations('prefList', ['selectPref', 'unselectPref']),
+    ...mapActions('prefList', ['fetchPrefectures']),
   },
 })
 </script>
