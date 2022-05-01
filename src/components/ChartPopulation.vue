@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <chart v-if="getResponseStatus === 200" :options="chartOptions"></chart>
-    <div v-else>
+  <div class="chart">
+    <chart
+      v-if="getResponseStatus === 200"
+      :options="chartOptions"
+      class="chart__figure"
+    ></chart>
+    <div v-else class="chart__message">
       <p v-if="getResponseStatus === 0">
         都道府県を選択して人口データを取得しましょう
       </p>
@@ -41,3 +45,21 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.chart {
+  width: 90%;
+  margin: auto;
+  margin-top: 10vh;
+
+  &__message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+    border: 1px solid rgb(0 0 0 / 0.4);
+    border-radius: 32px;
+  }
+}
+</style>
