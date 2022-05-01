@@ -12,5 +12,6 @@ module.exports = {
   // https://stylelint.io/user-guide/configuration
   rules: {
     'selector-class-pattern': '^[a-z][a-z0-9_-]+$',
+    'alpha-value-notation': 'number',
   },
 }
