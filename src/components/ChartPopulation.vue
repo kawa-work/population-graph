@@ -1,11 +1,15 @@
 <template>
   <div>
-    <!-- 
-			TODO: add other case such as 429 Too Many Request
-			ref: https://opendata.resas-portal.go.jp/docs/api/v1/detail/index.html
-		 -->
     <chart v-if="getResponseStatus === 200" :options="chartOptions"></chart>
-    <p v-else>データ取得中</p>
+    <div v-else>
+      <p v-if="getResponseStatus === 0">
+        都道府県を選択して人口データを取得しましょう
+      </p>
+      <p v-else-if="getResponseStatus === 429">
+        アクセスが集中しているようです。<br />少しお待ちいただいてから再度お試しください。
+      </p>
+      <p v-else>サイトに不具合が起きているようです。</p>
+    </div>
   </div>
 </template>
 
